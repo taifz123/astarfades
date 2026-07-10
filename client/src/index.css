@@ -1,61 +1,14 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   /* Empire Fades Brand Colors - Premium Luxury Palette */
   --primary: #D4AF37;  /* Metallic Gold */
   --primary-foreground: #000000;
-  --sidebar-primary: #D4AF37;
-  --sidebar-primary-foreground: #000000;
-  --chart-1: #D4AF37;
-  --chart-2: #B8860B;
-  --chart-3: #FFD700;
-  --chart-4: #8B6508;
-  --chart-5: #4B3621;
-  --radius: 0.25rem; /* Sharper corners for a more premium look */
-  --background: #0A0A0A; /* Deep Black/Grey */
-  --foreground: #F5F5F5; /* Off-White for readability */
+  --radius: 0.25rem;
+  --background: #0A0A0A;
+  --foreground: #F5F5F5;
   --card: #141414;
   --card-foreground: #F5F5F5;
   --popover: #141414;
@@ -71,12 +24,6 @@
   --border: #262626;
   --input: #1A1A1A;
   --ring: #D4AF37;
-  --sidebar: #0A0A0A;
-  --sidebar-foreground: #F5F5F5;
-  --sidebar-accent: #D4AF37;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #262626;
-  --sidebar-ring: #D4AF37;
   
   /* Typography */
   --font-display: 'Playfair Display', serif;
@@ -85,7 +32,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -97,82 +44,43 @@
     letter-spacing: 0.02em;
     text-transform: uppercase;
   }
-  h1 {
-    @apply text-5xl md:text-7xl font-bold;
-  }
-  h2 {
-    @apply text-4xl md:text-6xl font-bold;
-  }
-  h3 {
-    @apply text-2xl md:text-4xl font-bold;
-  }
-  button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
-    @apply cursor-pointer;
-  }
 }
 
 @layer components {
   .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    @apply w-full mx-auto px-4;
   }
 
-  @media (min-width: 640px) {
+  @screen sm {
     .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      @apply px-6;
     }
   }
 
-  @media (min-width: 1024px) {
+  @screen lg {
     .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: 1400px;
+      @apply px-8 max-w-[1400px];
     }
   }
-}
 
-/* Empire Fades Custom Components */
-.btn-primary {
-  @apply bg-primary text-primary-foreground px-8 py-4 rounded-none font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 inline-block border border-primary;
-}
+  /* Empire Fades Custom Components */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-none font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 inline-block border border-primary cursor-pointer;
+  }
 
-.btn-secondary {
-  @apply bg-transparent text-primary px-8 py-4 rounded-none font-bold uppercase tracking-widest border border-primary hover:bg-primary hover:text-black transition-all duration-300 inline-block;
-}
+  .btn-secondary {
+    @apply bg-transparent text-primary px-8 py-4 rounded-none font-bold uppercase tracking-widest border border-primary hover:bg-primary hover:text-black transition-all duration-300 inline-block cursor-pointer;
+  }
 
-.section-divider {
-  @apply w-24 h-1 bg-primary mx-auto my-8;
-}
+  .section-divider {
+    @apply w-24 h-1 bg-primary mx-auto my-8;
+  }
 
-.hero-section {
-  @apply relative w-full overflow-hidden;
-}
+  .luxury-card {
+    @apply bg-card border border-border p-8 hover:border-primary transition-all duration-500;
+  }
 
-.luxury-card {
-  @apply bg-card border border-border p-8 hover:border-primary transition-all duration-500;
-}
-
-.text-gold {
-  @apply text-primary;
-}
-
-.bg-gold {
-  @apply bg-primary;
-}
-
-.gold-gradient {
-  background: linear-gradient(135deg, #D4AF37 0%, #8B6508 100%);
+  .skip-to-main {
+    @apply absolute -top-10 left-0 bg-primary text-black px-4 py-2 z-[100] font-bold transition-all focus:top-0;
+  }
 }
