@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, MapPin, Phone, Mail, Instagram, Clock, Scissors, Award, Star } from 'lucide-react';
-import { MapView } from '@/components/Map';
 
 /**
  * Empire Fades - Premium Luxury Barbershop
@@ -47,6 +46,10 @@ export default function Home() {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  const googleMapsUrl = "https://www.google.com/maps?sca_esv=2c6ce2cde38922f6&sxsrf=APpeQnsVm-OxhdISyvAaLgeVbvLXZ7gfaA:1783651500794&iflsig=ABILxe8AAAAAalBqvDvX0PEO7KM0McjRB1p6tP-rUFF7&uact=5&gs_lp=Egdnd3Mtd2l6IhZlbXBpcmUgZmFkZXMgbGl2ZXJwb29sMgUQABiABDIFEAAYgAQyCBAAGBYYHhgKMgYQABgWGB4yCxAAGIAEGIoFGIYDMgsQABiABBiKBRiGAzIFEAAY7wUyBRAAGO8FMggQABiABBiiBDIFEAAY7wVIqhJQAFjlEXAAeACQAQCYAbsBoAGiGaoBBDAuMjG4AQPIAQD4AQGYAhWgAtYZwgIOEC4YgAQYigUYsQMYgwHCAgsQABiABBixAxiDAcICBRAuGIAEwgIEEAAYA8ICDhAAGIAEGIoFGLEDGIMBwgILEAAYgAQYigUYsQPCAg4QLhiABBixAxjHARjRA8ICCBAuGIAEGLEDwgIIEAAYgAQYsQPCAgsQLhiDARixAxiABMICCxAuGIAEGMcBGK8BwgIJEAAYgAQYChgLwgIIEAAYiQUYogSYAwCSBwQwLjIxoAf5ogGyBwQwLjIxuAfWGcIHBjAuMjAuMcgHIIAIAQ&um=1&ie=UTF-8&fb=1&gl=sg&sa=X&geocode=KeGJoV15lRJrMXDqutx1pZaA&daddr=Shop+219/263+Elizabeth+St,+Liverpool+NSW+2170,+Australia";
+  
+  const googleReviewUrl = "https://www.google.com/search?q=empire+fades+liverpool&sca_esv=2c6ce2cde38922f6&sxsrf=APpeQnsVm-OxhdISyvAaLgeVbvLXZ7gfaA%3A1783651500794&source=hp&ei=rFxQasPYLZOeseMPp6LikQs&iflsig=ABILxe8AAAAAalBqvDvX0PEO7KM0McjRB1p6tP-rUFF7&ved=0ahUKEwjD3uvQi8eVAxUTT2wGHSeROLIQ4dUDCD0&uact=5&oq=empire+fades+liverpool&gs_lp=Egdnd3Mtd2l6IhZlbXBpcmUgZmFkZXMgbGl2ZXJwb29sMgUQABiABDIFEAAYgAQyCBAAGBYYHhgKMgYQABgWGB4yCxAAGIAEGIoFGIYDMgsQABiABBiKBRiGAzIFEAAY7wUyBRAAGO8FMggQABiABBiiBDIFEAAY7wVIqhJQAFjlEXAAeACQAQCYAbsBoAGiGaoBBDAuMjG4AQPIAQD4AQGYAhWgAtYZwgIOEC4YgAQYigUYsQMYgwHCAgsQABiABBixAxiDAcICBRAuGIAEwgIEEAAYA8ICDhAAGIAEGIoFGLEDGIMBwgILEAAYgAQYigUYsQPCAg4QLhiABBixAxjHARjRA8ICCBAuGIAEGLEDwgIIEAAYgAQYsQPCAgsQLhiDARixAxiABMICCxAuGIAEGMcBGK8BwgIJEAAYgAQYChgLwgIIEAAYiQUYogSYAwCSBwQwLjIxoAf5ogGyBwQwLjIxuAfWGcIHBjAuMjAuMcgHIIAIAQ&sclient=gws-wiz#lrd=0x6b1295795da189e1:0x8096a575dcbaea70,3,,,,";
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-black">
@@ -285,8 +288,27 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a href="tel:+61406713336" className="btn-primary">CALL LIVERPOOL SHOP</a>
-              <a href="https://www.google.com/maps?q=Shop+219/263+Elizabeth+St,+Liverpool+NSW+2170" target="_blank" rel="noopener noreferrer" className="btn-secondary">GET DIRECTIONS</a>
+              <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">GET DIRECTIONS</a>
             </div>
+          </div>
+        </section>
+
+        {/* Google Review Section */}
+        <section className="py-16 bg-background">
+          <div className="container mx-auto px-4 text-center">
+            <a 
+              href={googleReviewUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block hover:scale-105 transition-transform duration-300"
+              aria-label="Leave us a Google Review"
+            >
+              <img 
+                src="/assets/images&logo/reviewa.png" 
+                alt="Leave us a Google Review" 
+                className="max-w-[300px] md:max-w-[400px] mx-auto rounded-lg shadow-xl"
+              />
+            </a>
           </div>
         </section>
 
@@ -351,11 +373,25 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="h-[600px] border border-primary/20 grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden">
-                <MapView 
-                  address="Shop 219/263 Elizabeth St, Liverpool NSW 2170, Australia"
-                  className="w-full h-full"
+              <div className="h-[600px] border border-primary/20 grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden relative group">
+                <a 
+                  href={googleMapsUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                  <span className="btn-primary">VIEW ON GOOGLE MAPS</span>
+                </a>
+                <img 
+                  src="/assets/images&logo/image1.png" 
+                  alt="Westfield Liverpool Location" 
+                  className="w-full h-full object-cover"
                 />
+                <div className="absolute bottom-8 left-8 bg-black/80 p-6 border-l-4 border-primary backdrop-blur-sm">
+                  <p className="text-primary font-bold tracking-widest text-sm mb-2 uppercase">Westfield Liverpool</p>
+                  <p className="text-white text-lg">Shop 219/263 Elizabeth St</p>
+                  <p className="text-gray-400">Liverpool NSW 2170</p>
+                </div>
               </div>
             </div>
           </div>
