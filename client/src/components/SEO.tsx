@@ -5,9 +5,9 @@
 
 export function SEO() {
   const businessName = "Empire Fades";
-  const businessAddress = "Shop 219/263 Elizabeth St, Liverpool NSW 2170, Australia";
-  const businessPhone = "0400000000";
-  const businessEmail = "hello@empirefades.com.au";
+  const businessAddress = "Shop 219/263 Elizabeth St, Liverpool NSW 2170, Australia (Westfield Liverpool)";
+  const businessPhone = "+61 406 713 336";
+  const businessEmail = "Empirefadesliverpool@gmail.com";
   const businessURL = "https://empirefades.com.au";
   const businessLatitude = "-33.9204";
   const businessLongitude = "150.9241";
@@ -17,7 +17,7 @@ export function SEO() {
     "@context": "https://schema.org",
     "@type": "BarberShop",
     "name": businessName,
-    "description": "Premium luxury barbershop in Liverpool NSW specializing in precision fades, classic cuts, and beard styling",
+    "description": "Premium luxury barbershop in Westfield Liverpool specializing in precision fades and master grooming.",
     "image": businessImage,
     "url": businessURL,
     "telephone": businessPhone,
@@ -38,7 +38,7 @@ export function SEO() {
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Friday"],
         "opens": "09:00",
         "closes": "17:30"
       },
@@ -50,12 +50,6 @@ export function SEO() {
       },
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Friday",
-        "opens": "09:00",
-        "closes": "17:30"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
         "dayOfWeek": "Saturday",
         "opens": "09:00",
         "closes": "17:00"
@@ -63,35 +57,12 @@ export function SEO() {
       {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": "Sunday",
-        "opens": "10:00",
-        "closes": "16:00"
+        "opens": "09:30",
+        "closes": "17:00"
       }
     ],
-    "priceRange": "$$",
     "sameAs": [
-      "https://www.instagram.com/empirefades",
-      "https://www.facebook.com/empirefades"
-    ]
-  };
-
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": businessName,
-    "image": businessImage,
-    "url": businessURL,
-    "telephone": businessPhone,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Shop 219/263 Elizabeth St",
-      "addressLocality": "Liverpool",
-      "addressRegion": "NSW",
-      "postalCode": "2170",
-      "addressCountry": "AU"
-    },
-    "sameAs": [
-      "https://www.instagram.com/empirefades",
-      "https://www.facebook.com/empirefades"
+      "https://www.instagram.com/empirefadesliverpool/"
     ]
   };
 
@@ -102,8 +73,8 @@ export function SEO() {
 
       {/* Open Graph Meta Tags */}
       <meta property="og:type" content="business.business" />
-      <meta property="og:title" content="Empire Fades | Premium Luxury Barbershop Liverpool NSW" />
-      <meta property="og:description" content="Experience the ultimate in male grooming at Empire Fades. Liverpool's premier luxury barbershop specializing in precision fades, classic cuts, and premium beard styling." />
+      <meta property="og:title" content="Empire Fades | Premium Luxury Barbershop Westfield Liverpool" />
+      <meta property="og:description" content="Experience the ultimate in male grooming at Empire Fades. Liverpool's premier luxury barbershop in Westfield Liverpool specializing in precision fades and premium styling." />
       <meta property="og:url" content={businessURL} />
       <meta property="og:image" content={`${businessURL}${businessImage}`} />
       <meta property="og:image:width" content="1254" />
@@ -113,23 +84,19 @@ export function SEO() {
 
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Empire Fades | Premium Luxury Barbershop Liverpool NSW" />
-      <meta name="twitter:description" content="Experience the ultimate in male grooming at Empire Fades. Liverpool's premier luxury barbershop specializing in precision fades, classic cuts, and premium beard styling." />
+      <meta name="twitter:title" content="Empire Fades | Premium Luxury Barbershop Westfield Liverpool" />
+      <meta name="twitter:description" content="Experience the ultimate in male grooming at Empire Fades. Liverpool's premier luxury barbershop in Westfield Liverpool specializing in precision fades and premium styling." />
       <meta name="twitter:image" content={`${businessURL}${businessImage}`} />
 
       {/* Additional Meta Tags */}
-      <meta name="keywords" content="barbershop, Liverpool, fade, haircut, beard trim, men's grooming, premium barber, NSW" />
+      <meta name="keywords" content="barbershop, Liverpool, Westfield Liverpool, fade, haircut, beard trim, men's grooming, premium barber, NSW" />
       <meta name="author" content={businessName} />
       <meta name="robots" content="index, follow" />
       <meta name="language" content="English" />
-      <meta name="revisit-after" content="7 days" />
 
       {/* JSON-LD Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify(localBusinessSchema)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(organizationSchema)}
       </script>
     </>
   );

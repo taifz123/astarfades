@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, MapPin, Phone, Mail, Instagram, Facebook, Clock, Scissors, Award, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MapPin, Phone, Mail, Instagram, Clock, Scissors, Award, Star } from 'lucide-react';
 import { MapView } from '@/components/Map';
 
 /**
@@ -75,7 +75,7 @@ export default function Home() {
             <a href="#contact" className="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Contact</a>
           </nav>
           <div className="flex items-center gap-4">
-            <a href="tel:0400000000" className="btn-primary py-2 px-6 text-xs hidden sm:block" aria-label="Call Empire Fades">CALL NOW</a>
+            <a href="tel:+61406713336" className="btn-primary py-2 px-6 text-xs hidden sm:block" aria-label="Call Empire Fades">CALL NOW</a>
             <button className="text-primary hover:text-white transition-colors md:hidden" aria-label="Toggle menu">
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -134,7 +134,7 @@ export default function Home() {
                 className="w-32 md:w-48 h-auto mx-auto mb-4"
               />
               <div className="h-px w-24 bg-primary mx-auto mb-4"></div>
-              <p className="text-primary tracking-[0.3em] font-bold uppercase text-sm md:text-base">Liverpool's Elite Barbershop</p>
+              <p className="text-primary tracking-[0.3em] font-bold uppercase text-sm md:text-base">Westfield Liverpool's Elite Barbershop</p>
             </div>
             <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tight leading-none" style={{ fontFamily: 'var(--font-display)' }}>
               REIGN OVER <br/><span className="text-primary">YOUR STYLE</span>
@@ -183,7 +183,7 @@ export default function Home() {
                 <h3 className="mb-8 leading-tight text-4xl md:text-5xl font-bold">CRAFTING <span className="text-primary">CONFIDENCE</span></h3>
                 <div className="w-20 h-1 bg-primary mb-8"></div>
                 <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-                  At Empire Fades, we believe a haircut is more than just a service—it's a statement. Located in the heart of Liverpool, our barbershop combines traditional craftsmanship with modern techniques to deliver world-class grooming.
+                  At Empire Fades, we believe a haircut is more than just a service—it's a statement. Located in Westfield Liverpool, our barbershop combines traditional craftsmanship with modern techniques to deliver world-class grooming.
                 </p>
                 <p className="text-lg text-gray-400 mb-12 leading-relaxed">
                   Our elite team of barbers is dedicated to precision, style, and providing an unparalleled experience in a premium, luxury environment. From the moment you step in, you're treated like royalty.
@@ -219,19 +219,16 @@ export default function Home() {
               {[
                 { 
                   title: 'Empire Fade', 
-                  price: 'From $45', 
                   desc: 'Our signature precision fade, tailored to your head shape and style preference.',
                   icon: <Scissors className="text-primary" size={32} aria-hidden="true" />
                 },
                 { 
                   title: 'Classic Cut', 
-                  price: 'From $40', 
                   desc: 'Timeless styles executed with modern precision for a clean, professional look.',
                   icon: <Award className="text-primary" size={32} aria-hidden="true" />
                 },
                 { 
                   title: 'Beard Sculpt', 
-                  price: 'From $30', 
                   desc: 'Professional beard shaping, lining, and conditioning for the perfect finish.',
                   icon: <Star className="text-primary" size={32} aria-hidden="true" />
                 },
@@ -241,15 +238,13 @@ export default function Home() {
                   <h3 className="text-2xl mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
                   <p className="text-gray-400 mb-8 leading-relaxed">{service.desc}</p>
                   <div className="flex items-center justify-between pt-6 border-t border-primary/10">
-                    <span className="text-xl font-bold text-primary tracking-tighter">{service.price}</span>
                     <a href="#contact" className="text-xs font-black tracking-widest uppercase border-b border-primary pb-1 hover:text-white transition-colors">INQUIRE</a>
                   </div>
                 </article>
               ))}
             </div>
             <div className="mt-16 text-center">
-              <p className="text-gray-500 italic mb-8">* Senior and student discounts available. Contact us for full price list.</p>
-              <a href="tel:0400000000" className="btn-primary">CALL TO BOOK AN APPOINTMENT</a>
+              <a href="tel:+61406713336" className="btn-primary">CALL FOR INQUIRIES</a>
             </div>
           </div>
         </section>
@@ -289,7 +284,7 @@ export default function Home() {
               Walk-ins are welcome, but we recommend calling ahead to ensure your spot with our master barbers.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a href="tel:0400000000" className="btn-primary">CALL LIVERPOOL SHOP</a>
+              <a href="tel:+61406713336" className="btn-primary">CALL LIVERPOOL SHOP</a>
               <a href="https://www.google.com/maps?q=Shop+219/263+Elizabeth+St,+Liverpool+NSW+2170" target="_blank" rel="noopener noreferrer" className="btn-secondary">GET DIRECTIONS</a>
             </div>
           </div>
@@ -311,6 +306,7 @@ export default function Home() {
                     <div>
                       <h3 className="text-lg font-bold tracking-widest mb-2">LOCATION</h3>
                       <p className="text-gray-400 text-lg leading-relaxed">
+                        Westfield Liverpool<br/>
                         Shop 219/263 Elizabeth St<br/>
                         Liverpool NSW 2170<br/>
                         Australia
@@ -325,11 +321,13 @@ export default function Home() {
                     <div>
                       <h3 className="text-lg font-bold tracking-widest mb-2">HOURS</h3>
                       <dl className="grid grid-cols-2 gap-x-8 text-gray-400 text-sm">
-                        <dt>Mon - Wed:</dt> <dd>9:00 AM - 5:30 PM</dd>
+                        <dt>Monday:</dt> <dd>9:00 AM - 5:30 PM</dd>
+                        <dt>Tuesday:</dt> <dd>9:00 AM - 5:30 PM</dd>
+                        <dt>Wednesday:</dt> <dd>9:00 AM - 5:30 PM</dd>
                         <dt>Thursday:</dt> <dd>9:00 AM - 9:00 PM</dd>
                         <dt>Friday:</dt> <dd>9:00 AM - 5:30 PM</dd>
                         <dt>Saturday:</dt> <dd>9:00 AM - 5:00 PM</dd>
-                        <dt>Sunday:</dt> <dd>10:00 AM - 4:00 PM</dd>
+                        <dt>Sunday:</dt> <dd>9:30 AM - 5:00 PM</dd>
                       </dl>
                     </div>
                   </div>
@@ -340,18 +338,15 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold tracking-widest mb-2">CONTACT</h3>
-                      <p className="text-gray-400 text-lg"><a href="tel:0400000000" className="hover:text-primary transition-colors">0400 000 000</a></p>
-                      <p className="text-gray-400 text-lg"><a href="mailto:hello@empirefades.com.au" className="hover:text-primary transition-colors">hello@empirefades.com.au</a></p>
+                      <p className="text-gray-400 text-lg"><a href="tel:+61406713336" className="hover:text-primary transition-colors">+61 406 713 336</a></p>
+                      <p className="text-gray-400 text-lg"><a href="mailto:Empirefadesliverpool@gmail.com" className="hover:text-primary transition-colors">Empirefadesliverpool@gmail.com</a></p>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-16 flex gap-6">
-                  <a href="#" aria-label="Visit our Instagram" className="w-12 h-12 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-black transition-all">
+                  <a href="https://www.instagram.com/empirefadesliverpool/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram" className="w-12 h-12 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-black transition-all">
                     <Instagram size={20} />
-                  </a>
-                  <a href="#" aria-label="Visit our Facebook" className="w-12 h-12 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-black transition-all">
-                    <Facebook size={20} />
                   </a>
                 </div>
               </div>
@@ -377,7 +372,7 @@ export default function Home() {
           />
           <h3 className="text-2xl font-black tracking-widest text-primary mb-4" style={{ fontFamily: 'var(--font-display)' }}>EMPIRE FADES</h3>
           <p className="text-gray-500 max-w-md mx-auto mb-12">
-            The premier luxury grooming destination in Liverpool. Mastery, precision, and the empire standard in every cut.
+            The premier luxury grooming destination in Westfield Liverpool. Mastery, precision, and the empire standard in every cut.
           </p>
           <nav className="flex justify-center gap-8 mb-12" aria-label="Footer navigation">
             <a href="#about" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-primary transition-colors">About</a>
