@@ -113,13 +113,15 @@ interface MapViewProps {
   className?: string;
   initialCenter?: google.maps.LatLngLiteral;
   initialZoom?: number;
+  address?: string;
   onMapReady?: (map: google.maps.Map) => void;
 }
 
 export function MapView({
   className,
-  initialCenter = { lat: 37.7749, lng: -122.4194 },
-  initialZoom = 12,
+  initialCenter = { lat: -33.9204, lng: 150.9241 }, // Default to Liverpool NSW
+  initialZoom = 15,
+  address,
   onMapReady,
 }: MapViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -134,12 +136,71 @@ export function MapView({
     map.current = new window.google.maps.Map(mapContainer.current, {
       zoom: initialZoom,
       center: initialCenter,
-      mapTypeControl: true,
+      mapTypeControl: false,
       fullscreenControl: true,
       zoomControl: true,
       streetViewControl: true,
       mapId: "DEMO_MAP_ID",
+      styles: [
+        {
+          "elementType": "geometry",
+          "stylers": [{ "color": "#212121" }]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [{ "visibility": "off" }]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [{ "color": "#757575" }]
+        },
+        {
+          "elementType": "labels.text.stroke",
+          "stylers": [{ "color": "#212121" }]
+        },
+        {
+          "featureType": "administrative",
+          "elementType": "geometry",
+          "stylers": [{ "color": "#757575" }]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "geometry",
+          "stylers": [{ "color": "#181818" }]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text.fill",
+          "stylers": [{ "color": "#d4af37" }]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry.fill",
+          "stylers": [{ "color": "#2c2c2c" }]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [{ "color": "#000000" }]
+        }
+      ]
     });
+
+    if (address && window.google) {
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ address }, (results, status) => {
+        if (status === "OK" && results && results[0] && map.current) {
+          const location = results[0].geometry.location;
+          map.current.setCenter(location);
+          new window.google.maps.marker.AdvancedMarkerElement({
+            map: map.current,
+            position: location,
+            title: "Empire Fades",
+          });
+        }
+      });
+    }
+
     if (onMapReady) {
       onMapReady(map.current);
     }

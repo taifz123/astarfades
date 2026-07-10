@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /404
+
+Sitemap: https://empirefades.com.au/sitemap.xml

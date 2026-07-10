@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight, MapPin, Phone, Mail, Instagram, Facebook, Twitter } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, MapPin, Phone, Mail, Instagram, Facebook, Clock, Scissors, Award, Star } from 'lucide-react';
+import { MapView } from '@/components/Map';
 
 /**
- * Stacked AU - Premium Burgers & Sandwiches
- * Design Philosophy: Bold, energetic, food-focused
- * Colors: Vibrant red (#E63946) with dark accents
+ * Empire Fades - Premium Luxury Barbershop
+ * Design Philosophy: Regal, elite, high-contrast luxury
+ * Colors: Gold (#D4AF37) and Deep Black (#0A0A0A)
  * Typography: Playfair Display for headlines, Poppins for body
- * Layout: Hero carousel → Product showcase → Call-to-action → Social proof → Footer
+ * Accessibility: WCAG AA compliant with semantic HTML and ARIA labels
  */
 
 export default function Home() {
@@ -14,17 +15,24 @@ export default function Home() {
 
   const heroImages = [
     {
-      url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663373970120/6VNrgPEST6ucjuAvWfhnPh/burger-hero_72d5e693.jpg',
-      alt: 'Premium Stacked Burger',
+      url: '/assets/images&logo/image1.png',
+      alt: 'Empire Fades Interior - Premium Barbershop Environment',
     },
     {
-      url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663373970120/6VNrgPEST6ucjuAvWfhnPh/burger-showcase_7e925497.jpg',
-      alt: 'Gourmet Burger Showcase',
+      url: '/assets/images&logo/image3.png',
+      alt: 'Precision Haircut in Progress',
     },
     {
-      url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663373970120/6VNrgPEST6ucjuAvWfhnPh/sandwich-detail_c2188de8.jpg',
-      alt: 'Artisanal Sandwich',
+      url: '/assets/images&logo/image5.png',
+      alt: 'Luxury Grooming Experience',
     },
+  ];
+
+  const galleryImages = [
+    '/assets/images&logo/image2.png',
+    '/assets/images&logo/image4.png',
+    '/assets/images&logo/image6.png',
+    '/assets/images&logo/image7.png',
   ];
 
   const nextSlide = () => {
@@ -35,23 +43,41 @@ export default function Home() {
     setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
   };
 
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-black">
+      {/* Skip to main content link for accessibility */}
+      <a href="#main" className="skip-to-main">
+        Skip to main content
+      </a>
+
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
-              S
-            </div>
-            <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-display)' }}>
-              STACKED AU
+      <header className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-primary/20 z-50" role="banner">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img 
+              src="/assets/images&logo/empirelogo.png" 
+              alt="Empire Fades Logo" 
+              className="w-12 h-12 object-contain"
+            />
+            <h1 className="text-xl md:text-2xl font-black tracking-tighter text-primary" style={{ fontFamily: 'var(--font-display)' }}>
+              EMPIRE FADES
             </h1>
           </div>
+          <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+            <a href="#about" className="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">About</a>
+            <a href="#services" className="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Services</a>
+            <a href="#gallery" className="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Gallery</a>
+            <a href="#contact" className="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Contact</a>
+          </nav>
           <div className="flex items-center gap-4">
-            <button className="btn-primary text-sm">ORDER NOW</button>
-            <button className="text-foreground hover:text-primary transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="tel:0400000000" className="btn-primary py-2 px-6 text-xs hidden sm:block" aria-label="Call Empire Fades">CALL NOW</a>
+            <button className="text-primary hover:text-white transition-colors md:hidden" aria-label="Toggle menu">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
@@ -59,246 +85,308 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Carousel Section */}
-      <section className="hero-section pt-24 bg-gradient-to-b from-gray-900 to-gray-800 relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-full h-full flex items-center justify-center">
+      {/* Main Content */}
+      <main id="main">
+        {/* Hero Section */}
+        <section className="hero-section h-screen relative flex items-center justify-center overflow-hidden" aria-label="Hero banner">
+          <div className="absolute inset-0 z-0">
             {heroImages.map((image, idx) => (
-              <img
+              <div
                 key={idx}
-                src={image.url}
-                alt={image.alt}
-                className={`absolute w-full h-full object-cover transition-opacity duration-500 ${
-                  idx === currentSlide ? 'opacity-100' : 'opacity-0'
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  idx === currentSlide ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
                 }`}
-              />
-            ))}
-            <div className="absolute inset-0 bg-black/40"></div>
-          </div>
-        </div>
-
-        {/* Carousel Controls */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-8 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
-        >
-          <ChevronLeft size={28} />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-8 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
-        >
-          <ChevronRight size={28} />
-        </button>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-          {heroImages.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                idx === currentSlide ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/75'
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Hero Text Overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-5 px-4">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-            STACKED AU
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-8">Premium Burgers & Sandwiches</p>
-          <button className="btn-primary">EXPLORE MENU</button>
-        </div>
-      </section>
-
-      {/* Our Food Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Image */}
-            <div className="order-2 lg:order-1">
-              <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663373970120/6VNrgPEST6ucjuAvWfhnPh/burger-showcase_7e925497.jpg"
-                alt="Our Premium Burgers"
-                className="food-card w-full"
-              />
-            </div>
-
-            {/* Right: Content */}
-            <div className="order-1 lg:order-2">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-                OUR FOOD
-              </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Crafted with passion and premium ingredients, every burger and sandwich is a masterpiece. We source only the finest quality meats, fresh produce, and artisanal breads to deliver an unforgettable culinary experience.
-              </p>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">100% Premium Beef</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">Fresh Local Produce</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">Artisanal Breads</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span className="text-gray-700">House-Made Sauces</span>
-                </li>
-              </ul>
-              <button className="btn-primary">VIEW FULL MENU</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-primary text-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16" style={{ fontFamily: 'var(--font-display)' }}>
-            WHY CHOOSE STACKED AU
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: 'Premium Quality', desc: 'Hand-selected ingredients sourced from trusted suppliers' },
-              { title: 'Expert Craftsmanship', desc: 'Prepared by experienced chefs with passion for flavor' },
-              { title: 'Fast Delivery', desc: 'Hot, fresh meals delivered quickly to your door' },
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg text-center hover:bg-white/20 transition-all duration-300">
-                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-                <p className="text-white/90">{item.desc}</p>
+                style={{ transitionProperty: 'opacity, transform' }}
+                aria-hidden={idx !== currentSlide}
+              >
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/60"></div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Featured Products */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground" style={{ fontFamily: 'var(--font-display)' }}>
-            FEATURED FAVORITES
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: 'The Stacked Classic', price: '$18.99', desc: 'Double beef patty, aged cheddar, caramelized onions' },
-              { name: 'The Aussie Stack', price: '$19.99', desc: 'Beef patty, beetroot, fried egg, bacon, special sauce' },
-              { name: 'The Gourmet Chicken', price: '$17.99', desc: 'Crispy chicken breast, Swiss cheese, fresh greens' },
-            ].map((product, idx) => (
-              <div key={idx} className="food-card bg-white">
-                <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
-                  <span className="text-6xl">🍔</span>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-2">{product.name}</h3>
-                  <p className="text-gray-600 mb-4 text-sm">{product.desc}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-primary">{product.price}</span>
-                    <button className="btn-primary text-sm">ADD</button>
+          {/* Carousel Controls */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 bg-primary/10 hover:bg-primary/30 text-primary p-2 md:p-4 border border-primary/20 transition-all duration-300"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={32} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 bg-primary/10 hover:bg-primary/30 text-primary p-2 md:p-4 border border-primary/20 transition-all duration-300"
+            aria-label="Next slide"
+          >
+            <ChevronRight size={32} />
+          </button>
+
+          {/* Hero Content */}
+          <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div className="inline-block mb-6 p-4 border border-primary/30 bg-black/40 backdrop-blur-sm">
+              <img 
+                src="/assets/images&logo/empirelogo.png" 
+                alt="Empire Fades Logo" 
+                className="w-32 md:w-48 h-auto mx-auto mb-4"
+              />
+              <div className="h-px w-24 bg-primary mx-auto mb-4"></div>
+              <p className="text-primary tracking-[0.3em] font-bold uppercase text-sm md:text-base">Liverpool's Elite Barbershop</p>
+            </div>
+            <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tight leading-none" style={{ fontFamily: 'var(--font-display)' }}>
+              REIGN OVER <br/><span className="text-primary">YOUR STYLE</span>
+            </h2>
+            <p className="text-lg md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto font-light tracking-wide">
+              Precision fades, classic cuts, and premium grooming for the modern gentleman. Experience the empire standard.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <a href="#services" className="btn-primary w-full sm:w-auto">OUR SERVICES</a>
+              <a href="#contact" className="btn-secondary w-full sm:w-auto">FIND US</a>
+            </div>
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-4" role="tablist" aria-label="Slide navigation">
+            {heroImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`h-1 transition-all duration-500 ${
+                  idx === currentSlide ? 'bg-primary w-12' : 'bg-white/20 w-6 hover:bg-white/40'
+                }`}
+                role="tab"
+                aria-selected={idx === currentSlide}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="py-24 bg-background relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="relative">
+                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-primary"></div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-primary"></div>
+                <img
+                  src="/assets/images&logo/image4.png"
+                  alt="Empire Fades Barber at Work"
+                  className="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+              <div>
+                <p className="text-primary font-bold tracking-widest uppercase mb-4">The Empire Standard</p>
+                <h3 className="mb-8 leading-tight text-4xl md:text-5xl font-bold">CRAFTING <span className="text-primary">CONFIDENCE</span></h3>
+                <div className="w-20 h-1 bg-primary mb-8"></div>
+                <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+                  At Empire Fades, we believe a haircut is more than just a service—it's a statement. Located in the heart of Liverpool, our barbershop combines traditional craftsmanship with modern techniques to deliver world-class grooming.
+                </p>
+                <p className="text-lg text-gray-400 mb-12 leading-relaxed">
+                  Our elite team of barbers is dedicated to precision, style, and providing an unparalleled experience in a premium, luxury environment. From the moment you step in, you're treated like royalty.
+                </p>
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center text-primary">
+                      <Scissors size={24} aria-hidden="true" />
+                    </div>
+                    <span className="font-bold tracking-widest text-sm">ELITE CUTS</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center text-primary">
+                      <Award size={24} aria-hidden="true" />
+                    </div>
+                    <span className="font-bold tracking-widest text-sm">MASTER BARBERS</span>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-primary to-red-700 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-            READY TO STACK?
-          </h2>
-          <p className="text-xl mb-8 text-white/90">Order now and experience premium burgers delivered fresh to your door</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-secondary">ORDER ONLINE</button>
-            <button className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-bold uppercase tracking-wide transition-colors duration-200 border-2 border-white">
-              FIND US
-            </button>
+        {/* Services Section */}
+        <section id="services" className="py-24 bg-secondary">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-20">
+              <h2 className="mb-4 text-4xl md:text-6xl font-bold">PREMIUM <span className="text-primary">SERVICES</span></h2>
+              <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
+              <p className="text-gray-400 tracking-widest uppercase text-sm">Tailored grooming for the modern man</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { 
+                  title: 'Empire Fade', 
+                  price: 'From $45', 
+                  desc: 'Our signature precision fade, tailored to your head shape and style preference.',
+                  icon: <Scissors className="text-primary" size={32} aria-hidden="true" />
+                },
+                { 
+                  title: 'Classic Cut', 
+                  price: 'From $40', 
+                  desc: 'Timeless styles executed with modern precision for a clean, professional look.',
+                  icon: <Award className="text-primary" size={32} aria-hidden="true" />
+                },
+                { 
+                  title: 'Beard Sculpt', 
+                  price: 'From $30', 
+                  desc: 'Professional beard shaping, lining, and conditioning for the perfect finish.',
+                  icon: <Star className="text-primary" size={32} aria-hidden="true" />
+                },
+              ].map((service, idx) => (
+                <article key={idx} className="luxury-card group">
+                  <div className="mb-8 group-hover:scale-110 transition-transform duration-300">{service.icon}</div>
+                  <h3 className="text-2xl mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
+                  <p className="text-gray-400 mb-8 leading-relaxed">{service.desc}</p>
+                  <div className="flex items-center justify-between pt-6 border-t border-primary/10">
+                    <span className="text-xl font-bold text-primary tracking-tighter">{service.price}</span>
+                    <a href="#contact" className="text-xs font-black tracking-widest uppercase border-b border-primary pb-1 hover:text-white transition-colors">INQUIRE</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="mt-16 text-center">
+              <p className="text-gray-500 italic mb-8">* Senior and student discounts available. Contact us for full price list.</p>
+              <a href="tel:0400000000" className="btn-primary">CALL TO BOOK AN APPOINTMENT</a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground" style={{ fontFamily: 'var(--font-display)' }}>
-            GET IN TOUCH
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="text-white" size={28} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Call Us</h3>
-              <p className="text-gray-600">(02) 1234 5678</p>
+        {/* Gallery Section */}
+        <section id="gallery" className="py-24 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-20">
+              <h2 className="mb-4 text-4xl md:text-6xl font-bold">THE <span className="text-primary">LOOKBOOK</span></h2>
+              <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
+              <p className="text-gray-400 tracking-widest uppercase text-sm">Mastery in every detail</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="text-white" size={28} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Visit Us</h3>
-              <p className="text-gray-600">Sydney, NSW, Australia</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="text-white" size={28} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Email Us</h3>
-              <p className="text-gray-600">hello@stackedau.com</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {galleryImages.map((img, idx) => (
+                <figure key={idx} className="relative aspect-[3/4] overflow-hidden group border border-primary/10">
+                  <img
+                    src={img}
+                    alt={`Gallery image ${idx + 1} - Empire Fades barbershop work`}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                  />
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </figure>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-32 relative overflow-hidden" aria-label="Call to action">
+          <div className="absolute inset-0 z-0">
+            <img src="/assets/images&logo/image1.png" alt="" className="w-full h-full object-cover opacity-30 grayscale" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/80"></div>
+          </div>
+          <div className="container mx-auto px-4 relative z-10 text-center">
+            <h2 className="mb-8 text-4xl md:text-6xl font-bold">EXPERIENCE THE <span className="text-primary">EMPIRE</span></h2>
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+              Walk-ins are welcome, but we recommend calling ahead to ensure your spot with our master barbers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a href="tel:0400000000" className="btn-primary">CALL LIVERPOOL SHOP</a>
+              <a href="https://www.google.com/maps?q=Shop+219/263+Elizabeth+St,+Liverpool+NSW+2170" target="_blank" rel="noopener noreferrer" className="btn-secondary">GET DIRECTIONS</a>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact & Map Section */}
+        <section id="contact" className="py-24 bg-secondary">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-16 text-4xl md:text-6xl font-bold">VISIT <span className="text-primary">US</span></h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+              <div>
+                <div className="w-20 h-1 bg-primary mb-12"></div>
+                
+                <div className="space-y-12">
+                  <address className="flex gap-6 not-italic">
+                    <div className="w-16 h-16 shrink-0 border border-primary/30 flex items-center justify-center text-primary">
+                      <MapPin size={28} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold tracking-widest mb-2">LOCATION</h3>
+                      <p className="text-gray-400 text-lg leading-relaxed">
+                        Shop 219/263 Elizabeth St<br/>
+                        Liverpool NSW 2170<br/>
+                        Australia
+                      </p>
+                    </div>
+                  </address>
+
+                  <div className="flex gap-6">
+                    <div className="w-16 h-16 shrink-0 border border-primary/30 flex items-center justify-center text-primary">
+                      <Clock size={28} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold tracking-widest mb-2">HOURS</h3>
+                      <dl className="grid grid-cols-2 gap-x-8 text-gray-400 text-sm">
+                        <dt>Mon - Wed:</dt> <dd>9:00 AM - 5:30 PM</dd>
+                        <dt>Thursday:</dt> <dd>9:00 AM - 9:00 PM</dd>
+                        <dt>Friday:</dt> <dd>9:00 AM - 5:30 PM</dd>
+                        <dt>Saturday:</dt> <dd>9:00 AM - 5:00 PM</dd>
+                        <dt>Sunday:</dt> <dd>10:00 AM - 4:00 PM</dd>
+                      </dl>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-6">
+                    <div className="w-16 h-16 shrink-0 border border-primary/30 flex items-center justify-center text-primary">
+                      <Phone size={28} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold tracking-widest mb-2">CONTACT</h3>
+                      <p className="text-gray-400 text-lg"><a href="tel:0400000000" className="hover:text-primary transition-colors">0400 000 000</a></p>
+                      <p className="text-gray-400 text-lg"><a href="mailto:hello@empirefades.com.au" className="hover:text-primary transition-colors">hello@empirefades.com.au</a></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-16 flex gap-6">
+                  <a href="#" aria-label="Visit our Instagram" className="w-12 h-12 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-black transition-all">
+                    <Instagram size={20} />
+                  </a>
+                  <a href="#" aria-label="Visit our Facebook" className="w-12 h-12 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-black transition-all">
+                    <Facebook size={20} />
+                  </a>
+                </div>
+              </div>
+              
+              <div className="h-[600px] border border-primary/20 grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden">
+                <MapView 
+                  address="Shop 219/263 Elizabeth St, Liverpool NSW 2170, Australia"
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">STACKED AU</h3>
-              <p className="text-gray-400">Premium burgers and sandwiches crafted with passion.</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-primary transition-colors">Menu</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold mb-4">Hours</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>Mon-Thu: 11am - 10pm</li>
-                <li>Fri-Sat: 11am - 11pm</li>
-                <li>Sun: 12pm - 9pm</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold mb-4">Follow Us</h4>
-              <div className="flex gap-4">
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors">
-                  <Instagram size={24} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors">
-                  <Facebook size={24} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors">
-                  <Twitter size={24} />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2026 Stacked AU. All rights reserved. | Crafted with passion for great food.</p>
+      <footer className="bg-black py-16 border-t border-primary/10" role="contentinfo">
+        <div className="container mx-auto px-4 text-center">
+          <img 
+            src="/assets/images&logo/empirelogo.png" 
+            alt="Empire Fades Logo" 
+            className="w-24 h-24 mx-auto mb-8 object-contain"
+          />
+          <h3 className="text-2xl font-black tracking-widest text-primary mb-4" style={{ fontFamily: 'var(--font-display)' }}>EMPIRE FADES</h3>
+          <p className="text-gray-500 max-w-md mx-auto mb-12">
+            The premier luxury grooming destination in Liverpool. Mastery, precision, and the empire standard in every cut.
+          </p>
+          <nav className="flex justify-center gap-8 mb-12" aria-label="Footer navigation">
+            <a href="#about" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-primary transition-colors">About</a>
+            <a href="#services" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-primary transition-colors">Services</a>
+            <a href="#gallery" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-primary transition-colors">Gallery</a>
+            <a href="#contact" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-primary transition-colors">Contact</a>
+          </nav>
+          <div className="pt-8 border-t border-white/5 text-[10px] text-gray-600 tracking-[0.3em] uppercase">
+            &copy; 2026 Empire Fades. All rights reserved. | Crafted for the elite.
           </div>
         </div>
       </footer>
